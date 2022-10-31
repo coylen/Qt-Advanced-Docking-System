@@ -1,21 +1,36 @@
-/*
- * Default style sheet on Linux Platforms with focus highlighting flag enabled
- */
+QMainWindow QProgressBar {
+        max-height: 8px;
+        color: transparent;
+}
+
+QToolBar {
+        margin: 0;
+}
+
+QSplitter[orientation="1"] {
+        min-width: 3px;
+        max-width: 3px;
+}
+QSplitter[orientation="2"] {
+        min-height: 3px;
+        max-height: 3px;
+}
+
 ads--CDockContainerWidget {
         background: palette(dark);
 }
-ads--CDockContainerWidget > QSplitter{
-        padding: 1 0 1 0;
-}
 
+ads--CDockContainerWidget > QSplitter{
+        padding: 3px;
+}
 
 ads--CDockContainerWidget ads--CDockSplitter::handle {
         background: palette(dark);
 }
 
 ads--CDockAreaWidget {
-        background: palette(window);
-        border: 1px solid white;
+        background: palette(base);
+        border-radius:  5px;
 }
 
 ads--CDockAreaWidget #tabsMenuButton::menu-indicator {
@@ -23,32 +38,39 @@ ads--CDockAreaWidget #tabsMenuButton::menu-indicator {
 }
 
 ads--CDockWidgetTab {
-        background: palette(window);
-        border-color: palette(light);
+        background: #303030;
         border-style: solid;
-        border-width: 0 1px 0 0;
-        padding: 0 0px;
+        border-width: 2px 1px 0 0;
+        border-color: palette(shadow);
+        border-top-color: #505050;
+        padding: 4px 5px;
 }
 
 ads--CDockWidgetTab[activeTab="true"] {
-        background: qlineargradient(spread : pad, x1 : 0, y1 : 0, x2 : 0, y2 : 0.5, stop : 0
-                palette(window), stop:1 palette(light));
-        /*background: palette(highlight);*/
+        border-top-color: palette(highlight);
+        background: palette(window);
 }
 
 ads--CDockWidgetTab QLabel {
-        color: palette(dark);
+        color: palette(text);
 }
 
 ads--CDockWidgetTab[activeTab="true"] QLabel {
-        color: palette(foreground);
+        color: palette(text);
 }
 
 ads--CDockWidget {
-        background: palette(light);
-        border-color: palette(light);
+        background: palette(window);
+        border-color: palette(shadow);
         border-style: solid;
-        border-width: 1px 0 0 0;
+        border-width: 0px 0 0 0;
+        padding: 0px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+}
+
+ads--CFloatingDockContainer {
+        border:  0;
 }
 
 ads--CTitleBarButton {
@@ -56,34 +78,48 @@ ads--CTitleBarButton {
 }
 
 QScrollArea#dockWidgetScrollArea {
-        padding: 0px;
+        background: transparent;
         border: none;
 }
 
+QMenuBar {
+        background-color: #1d1d1d;
+        color: palette(foreground);
+}
+
+QMainWindow > QToolBar {
+        background-color: #1d1d1d;
+        border: 0;
+}
+
+QStatusBar {
+        background-color: #1d1d1d;
+}
+
+QTableView {
+        border:  none;
+}
+
 #dockAreaCloseButton {
-        qproperty-icon: url(:/ads/images/close-button.svg),
-                url(:/ads/images/close-button-disabled.svg) disabled;
+        qproperty-icon: url(:/ads/images/close-button-light.svg);
         qproperty-iconSize: 16px;
 }
 
 #detachGroupButton {
-        qproperty-icon: url(:/ads/images/detach-button.svg),
-                url(:/ads/images/detach-button-disabled.svg) disabled;
+        qproperty-icon: url(:/ads/images/detach-button-light.svg);
         qproperty-iconSize: 16px;
 }
 
 #tabCloseButton {
         margin-top: 2px;
-        background: none;
         border: none;
         padding: 0px -2px;
-        qproperty-icon: url(:/ads/images/close-button.svg),
-                url(:/ads/images/close-button-disabled.svg) disabled;
+        qproperty-icon: url(:/ads/images/close-button-light.svg);
         qproperty-iconSize: 16px;
+        qproperty-windowOpacity: 0.1;
 }
 
 #tabCloseButton:hover {
-        /*border: 1px solid rgba(0, 0, 0, 32);*/
         background: rgba(0, 0, 0, 24);
 }
 
@@ -91,65 +127,20 @@ QScrollArea#dockWidgetScrollArea {
         background: rgba(0, 0, 0, 48);
 }
 
-
 #tabsMenuButton {
-        qproperty-icon: url(:/ads/images/tabs-menu-button.svg);
+        qproperty-icon: url(:/ads/images/tabs-menu-button-light.svg);
         qproperty-iconSize: 16px;
-}
-
-
-/* Focus related styling */
-ads--CDockWidgetTab[focused="true"] {
-        background: palette(highlight);
-        border-color: palette(highlight);
-}
-
-ads--CDockWidgetTab[focused="true"]>#tabCloseButton {
-        qproperty-icon: url(:/ads/images/close-button-focused.svg)
-}
-
-ads--CDockWidgetTab[focused="true"]>#tabCloseButton:hover {
-        background: rgba(255, 255, 255, 48);
-}
-
-ads--CDockWidgetTab[focused="true"]>#tabCloseButton:pressed {
-        background: rgba(255, 255, 255, 92);
-}
-
-ads--CDockWidgetTab[focused="true"] QLabel {
-        color: palette(light);
 }
 
 ads--CDockAreaTitleBar {
         background: transparent;
-        border-bottom: 2px solid palette(light);
         padding-bottom: 0px;
 }
-
-ads--CDockAreaWidget[focused="true"] ads--CDockAreaTitleBar {
-        background: transparent;
-        border-bottom: 2px solid palette(highlight);
-        padding-bottom: 0px;
-}
-
 
 ads--CFloatingWidgetTitleBar {
     qproperty-maximizeIcon: url(:/ads/images/maximize-button.svg);
     qproperty-normalIcon: url(:/ads/images/restore-button.svg);
 }
-
-
-/* does not properly work on KDE
-ads--CFloatingDockContainer[isActiveWindow="true"] ads--CFloatingWidgetTitleBar {
-        background: palette(highlight);
-        qproperty-maximizeIcon: url(:/ads/images/maximize-button-focused.svg);
-        qproperty-normalIcon: url(:/ads/images/restore-button-focused.svg);
-}
-
-ads--CFloatingDockContainer[isActiveWindow="true"] #floatingTitleLabel {
-        color: palette(light);
-}
-*/
 
 #floatingTitleCloseButton, #floatingTitleMaximizeButton {
    qproperty-iconSize: 16px;
@@ -157,11 +148,9 @@ ads--CFloatingDockContainer[isActiveWindow="true"] #floatingTitleLabel {
    margin: 6px 3px 6px 3px;
 }
 
-
 #floatingTitleCloseButton {
    qproperty-icon: url(:/ads/images/close-button.svg);
 }
-
 
 #floatingTitleCloseButton:hover, #floatingTitleMaximizeButton:hover {
     background: rgba(0, 0, 0, 24);
@@ -173,27 +162,6 @@ ads--CFloatingDockContainer[isActiveWindow="true"] #floatingTitleLabel {
     background: rgba(0, 0, 0, 48);
 }
 
-
 ads--CFloatingDockContainer[isActiveWindow="true"] #floatingTitleMaximizeButton {
     qproperty-iconSize: 16px;
 }
-
-
-/* does not properly work on KDE
-ads--CFloatingDockContainer[isActiveWindow="true"] #floatingTitleCloseButton {
-    qproperty-icon: url(:/ads/images/close-button-focused.svg);
-    qproperty-iconSize: 16px;
-}
-
-ads--CFloatingDockContainer[isActiveWindow="true"] #floatingTitleCloseButton:hover,
-ads--CFloatingDockContainer[isActiveWindow="true"] #floatingTitleMaximizeButton:hover {
-    background: rgba(255, 255, 255, 48);
-}
-
-
-ads--CFloatingDockContainer[isActiveWindow="true"] #floatingTitleCloseButton:pressed,
-ads--CFloatingDockContainer[isActiveWindow="true"] #floatingTitleMaximizeButton:pressed  {
-    background: rgba(255, 255, 255, 92);
-}
-*/
-

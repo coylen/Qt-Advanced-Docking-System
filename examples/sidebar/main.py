@@ -1,9 +1,10 @@
 import os
 import sys
 
-from qtpy import uic
-from qtpy.QtCore import Qt, QMargins
-from qtpy.QtWidgets import QApplication, QLabel, QVBoxLayout, QPlainTextEdit, QMainWindow
+#from qtpy import uic
+import PySide6QtAds
+from PySide6.QtCore import Qt, QMargins
+from PySide6.QtWidgets import QApplication, QLabel, QVBoxLayout, QPlainTextEdit, QMainWindow, QListWidgetItem
 
 try:
     from PyQtAds import QtAds
@@ -11,15 +12,15 @@ except ImportError:
     import PySide6QtAds as QtAds
 
 
-UI_FILE = os.path.join(os.path.dirname(__file__), 'MainWindow.ui')
+#UI_FILE = os.path.join(os.path.dirname(__file__), 'MainWindow.ui')
+from ui_MainWindow import Ui_MainWindow
 
-
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow, Ui_MainWindow):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        uic.loadUi(UI_FILE, self)
- 
+#        uic.loadUi(UI_FILE, self)
+        self.setupUi(self)
         # Create the dock manager. Because the parent parameter is a QMainWindow
         # the dock manager registers itself as the central widget.
         layout = QVBoxLayout(self.dockContainer);
@@ -52,6 +53,35 @@ class MainWindow(QMainWindow):
         dock_widget = QtAds.CDockWidget("Editor 1")
         self.menuView.addAction(dock_widget.toggleViewAction())
         self.dock_manager.addDockWidget(QtAds.BottomDockWidgetArea, dock_widget)
+
+    def buttonclicked(self):
+        test = QPlainTextEdit()
+        test.setPlaceholderText("FUCK ME I WORKED")
+        name = "Neils"
+        i = 0
+        while self.listWidget.findItems(name, Qt.MatchExactly):
+            i = i + 1
+            name=f"Neils {i}"
+
+        dock_widget = QtAds.CDockWidget(name)
+        dock_widget.setWidget(test)
+        self.dock_manager.addTabWidget(QtAds.LeftDockWidgetArea, dock_widget)
+        test2 = QListWidgetItem(name)
+        fl = test2.flags()
+#        test
+        test2.setCheckState(Qt.CheckState.Checked)
+        self.listWidget.addItem(test2)
+        self.listWidget.itemChanged.connect(self.itemclicked)
+        pass
+
+    def itemclicked(self, item):
+        for q in self.dock_manager.dockWidgets():
+            if q.objectName() == item.text():
+                if item.checkState() is Qt.CheckState.Checked:
+                    q.toggleView(True)
+                else:
+                    q.toggleView(False)
+        #pass
 
 
 if __name__ == '__main__':

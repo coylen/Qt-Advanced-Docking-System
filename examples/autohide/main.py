@@ -1,19 +1,21 @@
 import os
 import sys
 
-from PyQt5 import uic
-from PyQt5.QtCore import Qt, QTimer, QDir, QSignalBlocker
-from PyQt5.QtGui import QCloseEvent, QIcon
-from PyQt5.QtWidgets import (QApplication, QLabel, QCalendarWidget, QFrame, QTreeView,
+#from PySide6 import uic
+from PySide6.QtCore import Qt, QTimer, QDir, QSignalBlocker
+from PySide6.QtGui import QCloseEvent, QIcon, QAction
+from PySide6.QtWidgets import (QApplication, QLabel, QCalendarWidget, QFrame, QTreeView,
                              QTableWidget, QFileSystemModel, QPlainTextEdit, QToolBar,
-                             QWidgetAction, QComboBox, QAction, QSizePolicy, QInputDialog)
+                             QWidgetAction, QComboBox, QSizePolicy, QInputDialog, QMainWindow)
 
-from PyQtAds import QtAds
+import PySide6QtAds as QtAds
 
-UI_FILE = os.path.join(os.path.dirname(__file__), 'mainwindow.ui')
-MainWindowUI, MainWindowBase = uic.loadUiType(UI_FILE)
+from ui_mainwindow import Ui_CMainWindow
+
+#UI_FILE = os.path.join(os.path.dirname(__file__), 'mainwindow.ui')
+#MainWindowUI, MainWindowBase = uic.loadUiType(UI_FILE)
     
-class MainWindow(MainWindowUI, MainWindowBase):
+class MainWindow(Ui_CMainWindow, QMainWindow):
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -23,8 +25,11 @@ class MainWindow(MainWindowUI, MainWindowBase):
         QtAds.CDockManager.setConfigFlag(QtAds.CDockManager.OpaqueSplitterResize, True)
         QtAds.CDockManager.setConfigFlag(QtAds.CDockManager.XmlCompressionEnabled, False)
         QtAds.CDockManager.setConfigFlag(QtAds.CDockManager.FocusHighlighting, True)
+#        QtAds.CDockManager.setConfigFlag(QtAds.CDockManager.DefaultAutoHiderConfig, True)
+        QtAds.CDockManager.setAutoHideConfigFlag(QtAds.CDockManager.DefaultAutoHideConfig)
+        QtAds.CDockManager.setAutoHideConfigFlag()
         self.dock_manager = QtAds.CDockManager(self)
-        
+
         # Set central widget
         text_edit = QPlainTextEdit()
         text_edit.setPlaceholderText("This is the central editor. Enter your text here.")
@@ -76,7 +81,7 @@ class MainWindow(MainWindowUI, MainWindowBase):
         self.perspective_combobox = QComboBox(self)
         self.perspective_combobox.setSizeAdjustPolicy(QComboBox.AdjustToContents)
         self.perspective_combobox.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        self.perspective_combobox.activated[str].connect(self.dock_manager.openPerspective)
+        self.perspective_combobox.activated[int].connect(self.dock_manager.openPerspective)
         perspective_list_action.setDefaultWidget(self.perspective_combobox)
         self.toolBar.addSeparator()
         self.toolBar.addAction(perspective_list_action)

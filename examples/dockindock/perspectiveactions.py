@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QAction, QMenu
+from PySide6.QtWidgets import QAction, QMenu
 
 
 class LoadPerspectiveAction(QAction):

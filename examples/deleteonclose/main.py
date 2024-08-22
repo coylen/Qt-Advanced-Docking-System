@@ -1,8 +1,8 @@
 import sys
 
-from qtpy.QtGui import QCloseEvent
-from qtpy.QtCore import qDebug, QObject
-from qtpy.QtWidgets import QMainWindow, QAction, QTextEdit, QApplication, QMenuBar
+from PySide6.QtGui import QCloseEvent, QAction
+from PySide6.QtCore import qDebug, QObject
+from PySide6.QtWidgets import QMainWindow, QTextEdit, QApplication, QMenuBar
 
 try:
     from PyQtAds import QtAds

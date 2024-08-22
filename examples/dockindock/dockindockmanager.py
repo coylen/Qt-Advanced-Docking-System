@@ -1,6 +1,6 @@
-from qtpy.QtWidgets import QAction, QMenu, QInputDialog, QLineEdit
-from qtpy.QtCore import QSettings
-
+from PySide6.QtWidgets import  QMenu, QInputDialog, QLineEdit
+from PySide6.QtCore import QSettings
+from PySide6.QtGui import QAction
 # from PyQtAds import QtAds
 
 

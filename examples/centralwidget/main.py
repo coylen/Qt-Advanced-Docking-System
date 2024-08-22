@@ -1,12 +1,11 @@
 import os
 import sys
 
-from qtpy import uic
-from qtpy.QtCore import Qt, QTimer, QDir, QSignalBlocker
-from qtpy.QtGui import QCloseEvent, QIcon
-from qtpy.QtWidgets import (QApplication, QLabel, QCalendarWidget, QFrame, QTreeView,
+from PySide6.QtCore import Qt, QTimer, QDir, QSignalBlocker
+from PySide6.QtGui import QCloseEvent, QIcon, QAction
+from PySide6.QtWidgets import (QApplication, QLabel, QCalendarWidget, QFrame, QTreeView,
                              QTableWidget, QFileSystemModel, QPlainTextEdit, QToolBar,
-                             QWidgetAction, QComboBox, QAction, QSizePolicy, QInputDialog,
+                             QWidgetAction, QComboBox, QSizePolicy, QInputDialog,
                              QMainWindow)
 
 try:
@@ -14,15 +13,16 @@ try:
 except ImportError:
     import PySide6QtAds as QtAds
 
-UI_FILE = os.path.join(os.path.dirname(__file__), 'mainwindow.ui')
-
+#UI_FILE = os.path.join(os.path.dirname(__file__), 'mainwindow.ui')
+from ui_mainwindow import Ui_CMainWindow
     
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow, Ui_CMainWindow):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        uic.loadUi(UI_FILE, self)
- 
+#        uic.loadUi(UI_FILE, self)
+        self.setupUi(self)
+
         QtAds.CDockManager.setConfigFlag(QtAds.CDockManager.OpaqueSplitterResize, True)
         QtAds.CDockManager.setConfigFlag(QtAds.CDockManager.XmlCompressionEnabled, False)
         QtAds.CDockManager.setConfigFlag(QtAds.CDockManager.FocusHighlighting, True)

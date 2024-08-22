@@ -3,8 +3,8 @@ import tempfile
 import shutil
 import atexit
 
-from PyQt5.QtCore import pyqtSignal, QSettings, QObject
-from PyQtAds import QtAds
+from PySide6.QtCore import pyqtSignal, QSettings, QObject
+import PySide6QtAds as  QtAds
 
 from dockindockmanager import DockInDockManager
 from dockindock import DockInDockWidget

@@ -1,10 +1,10 @@
 import os
 import sys
 
-from qtpy import uic
-from qtpy.QtCore import Qt, QTimer
-from qtpy.QtGui import QCloseEvent
-from qtpy.QtWidgets import QApplication, QLabel, QMainWindow
+#from PySide6 import uic
+from PySide6.QtCore import Qt, QTimer
+#from qtpy.QtGui import QCloseEvent
+from PySide6.QtWidgets import QApplication, QLabel, QMainWindow
 
 try:
     from PyQtAds import QtAds
@@ -12,15 +12,15 @@ except ImportError:
     import PySide6QtAds as QtAds
 
 
-UI_FILE = os.path.join(os.path.dirname(__file__), 'MainWindow.ui')
+#UI_FILE = os.path.join(os.path.dirname(__file__), 'MainWindow.ui')
+from ui_MainWindow import Ui_MainWindow
 
-
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow, Ui_MainWindow):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        uic.loadUi(UI_FILE, self)
- 
+#        uic.loadUi(UI_FILE, self)
+        self.setupUi(self)
         # Create the dock manager. Because the parent parameter is a QMainWindow
         # the dock manager registers itself as the central widget.
         self.dock_manager = QtAds.CDockManager(self)

@@ -2,8 +2,8 @@ import sys
 import os
 import atexit
 
-from qtpy.QtWidgets import QApplication, QMainWindow, QLabel
-from qtpy.QtCore import Qt
+from PySide6.QtWidgets import QApplication, QMainWindow, QLabel
+from PySide6.QtCore import Qt
 # from PyQtAds import QtAds
 
 try:

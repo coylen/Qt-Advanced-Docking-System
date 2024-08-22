@@ -1,8 +1,8 @@
 import sys
 
-from qtpy.QtWidgets import (QApplication, QWidget, QVBoxLayout, QMessageBox,
+from PySide6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QMessageBox,
                              QInputDialog, QMenu, QLineEdit)
-from qtpy.QtGui import QIcon
+from PySide6.QtGui import QIcon
 
 from dockindockmanager import DockInDockManager
 # from perspectiveactions import LoadPerspectiveAction, RemovePerspectiveAction

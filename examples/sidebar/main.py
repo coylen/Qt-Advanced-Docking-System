@@ -65,7 +65,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         dock_widget = QtAds.CDockWidget(name)
         dock_widget.setWidget(test)
-        self.dock_manager.addTabWidget(QtAds.LeftDockWidgetArea, dock_widget)
+        self.dock_manager.addDockWidget(QtAds.LeftDockWidgetArea, dock_widget)
         test2 = QListWidgetItem(name)
         fl = test2.flags()
 #        test
